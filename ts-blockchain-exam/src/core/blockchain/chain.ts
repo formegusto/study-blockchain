@@ -1,4 +1,5 @@
 import { Block } from "@core/blockchain/block";
+import { DIFFICULTY_ADJUSTMENT_INTERVAL } from "@core/config";
 
 /*
 block.ts와 blockHeader.ts만으로 이미 block들의 체이닝 작업은 정상적으로 진행이된다.
@@ -30,7 +31,10 @@ export class Chain {
 
   public addBlock(data: string[]): Failable<Block, string> {
     const previousBlock = this.latestBlock;
-    const newBlock = Block.generateBlock(previousBlock, data);
+
+    const adjustmentBlock: Block = this.getAdjustmentBlock();
+
+    const newBlock = Block.generateBlock(previousBlock, data, adjustmentBlock);
     const isValid = Block.isValidNewBlock(newBlock, previousBlock);
 
     if (isValid.isError) return { isError: true, error: isValid.error };
@@ -38,5 +42,21 @@ export class Chain {
     this.blockchain.push(newBlock);
 
     return { isError: false, value: newBlock };
+  }
+
+  /**
+   * getAdjustmentBlock()
+   * 생성 시점 기준으로 블록 높이가 -10인 블록 구하기
+   * 1. 현재 높이값 < DIFFICULTY_ADJUSTMENT_INTERVAL : 제네시스 블록 반환
+   * 2. 현재 높이값 > DIFFICULTY_ADJUSTMENT_INTERVAL : -10번째 블록 반환
+   */
+  public getAdjustmentBlock() {
+    const currentLength = this.length;
+    const adjustmentBlock: Block =
+      this.length < DIFFICULTY_ADJUSTMENT_INTERVAL
+        ? Block.getGENESIS()
+        : this.blockchain[currentLength - DIFFICULTY_ADJUSTMENT_INTERVAL];
+
+    return adjustmentBlock;
   }
 }

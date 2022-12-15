@@ -16,7 +16,7 @@ describe("Chain 함수 테스트", () => {
   });
 
   it("addBlock() 함수 테스트", () => {
-    for (let i = 1; i <= 5; i++) node.addBlock([`Block #${i}`]);
+    for (let i = 1; i <= 300; i++) node.addBlock([`Block #${i}`]);
 
     console.log(node.chain);
   });

@@ -2077,6 +2077,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hex-to-binary@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hex-to-binary/-/hex-to-binary-1.0.1.tgz#61c7af016fc22bcea9704d9f2e9a38e8c7dbb854"
+  integrity sha512-m1ykzQs9fKfgfzXj2oV5xAWoyGaudwa0qxY4IDUOgY8J69fKY7mXdwTfQHtS3Y5kglpwM7UmyCSQFKnL87FrdQ==
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"

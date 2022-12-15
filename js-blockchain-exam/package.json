@@ -1,0 +1,13 @@
+{
+  "name": "js-blockchain-exam",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "merkle": "^0.6.0"
+  }
+}

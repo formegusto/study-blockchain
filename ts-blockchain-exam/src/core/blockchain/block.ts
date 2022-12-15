@@ -1,6 +1,7 @@
 import { SHA256 } from "crypto-js";
 import merkle from "merkle";
 import { BlockHeader } from "./blockHeader";
+import { GENESIS } from "@core/config";
 
 export class Block extends BlockHeader implements IBlock {
   public hash: string;
@@ -21,6 +22,10 @@ export class Block extends BlockHeader implements IBlock {
     this.data = _data;
   }
 
+  public static getGENESIS(): Block {
+    return GENESIS;
+  }
+
   public static getMerkleRoot<T>(_data: T[]): string {
     const merkleTree = merkle("sha256").sync(_data);
     return merkleTree.root();
@@ -36,6 +41,11 @@ export class Block extends BlockHeader implements IBlock {
       previousHash,
     ].join("");
     return SHA256(values).toString();
+  }
+
+  public static generateBlock(_previousBlock: Block, _data: string[]): Block {
+    const generateBlock = new Block(_previousBlock, _data);
+    return generateBlock;
   }
 
   public static isValidNewBlock(

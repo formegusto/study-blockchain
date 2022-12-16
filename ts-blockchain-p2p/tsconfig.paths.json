@@ -2,7 +2,10 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@routes": ["./routes"]
-    }
+      "@routes": ["./routes"],
+      "@core": ["./core"],
+      "@core/*": ["./core/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./@types"]
   }
 }

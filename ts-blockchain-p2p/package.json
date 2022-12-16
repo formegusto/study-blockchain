@@ -1,0 +1,27 @@
+{
+  "name": "ts-blockchain-p2p",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx tsc && node dist",
+    "start-nodemon": "nodemon --watch src -e ts --exec 'npx tsc && node dist'"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^18.11.15",
+    "@types/ws": "^8.5.3",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "ws": "^8.11.0"
+  },
+  "_moduleAliases": {
+    "@routes": "dist/routes"
+  }
+}

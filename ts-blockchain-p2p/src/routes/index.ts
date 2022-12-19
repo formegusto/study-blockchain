@@ -9,7 +9,7 @@ routes.get("/", (req, res) => {
 });
 
 // 블록 내용 조회 api
-routes.post("/chains", (req, res) => {
+routes.get("/chains", (req, res) => {
   return res.json(ws.chain);
 });
 
@@ -32,11 +32,14 @@ routes.post("/addToPeer", (req, res) => {
 
 // 연결된 sockets 조회
 routes.get("/peers", (req, res) => {
-  const sockets = ws.chain.map(
-    (s: any) => s._socket.remoteAddress + ":" + s._socket.remotePort
-  );
+  const sockets = ws.getSockets().map((s: any) => {
+    console.log(s._socket.remoteAddress);
+    return s._socket.remoteAddress + ":" + s._socket.remotePort;
+  });
 
   return res.json(sockets);
 });
+
+ws.listen();
 
 export default routes;

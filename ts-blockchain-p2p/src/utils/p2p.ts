@@ -1,12 +1,27 @@
 import { WebSocket } from "ws";
 import { Chain } from "@core/blockchain/chain";
 
+enum MessageType {
+  latest_block = 0,
+  all_block = 1,
+  receivedChain = 2,
+}
+
+interface Message {
+  type: MessageType;
+  payload: any;
+}
+
 export class P2PServer extends Chain {
   private sockets: WebSocket[];
 
   constructor() {
     super();
     this.sockets = [];
+  }
+
+  getSockets() {
+    return this.sockets;
   }
 
   /**
@@ -31,12 +46,17 @@ export class P2PServer extends Chain {
    * 서버쪽으로 연결 요청 시 실행되는 코드
    */
   connectToPeer(newPeer: string) {
-    const socket = new WebSocket(newPeer);
+    try {
+      console.log("newPeer : " + newPeer);
+      const socket = new WebSocket(newPeer);
 
-    // 클라이언트 기준 "open"
-    socket.on("open", () => {
-      this.connectSocket(socket);
-    });
+      // 클라이언트 기준 "open"
+      socket.on("open", () => {
+        this.connectSocket(socket);
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   connectSocket(socket: WebSocket) {

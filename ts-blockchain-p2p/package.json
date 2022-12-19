@@ -27,6 +27,8 @@
     "merkle": "^0.6.0"
   },
   "_moduleAliases": {
-    "@routes": "dist/routes"
+    "@utils": "dist/utils",
+    "@routes": "dist/routes",
+    "@core": "dist/core"
   }
 }

@@ -4,7 +4,8 @@
     "paths": {
       "@routes": ["./routes"],
       "@core": ["./core"],
-      "@core/*": ["./core/*"]
+      "@core/*": ["./core/*"],
+      "@utils": ["./utils"]
     },
     "typeRoots": ["./node_modules/@types", "./@types"]
   }
